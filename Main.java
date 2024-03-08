@@ -1,40 +1,56 @@
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class Main
 {
 	public static void main(String[] args) {
 		
-		BigDecimal valor;
 		LocalDateTime dia1 = LocalDateTime.now();
-		
-// 		System.out.println("Dia: " + dia1.toLocalDate());
-// 		System.out.println("Hora: " + dia1.toLocalTime());
+		LocalTime hora1 = LocalTime.now();
+		BigDecimal valor = new BigDecimal("10");
 		
 		Competicao comp1 = new Competicao(dia1.plusDays(1));
 		System.out.println("Competição: " + comp1.getDia());
 		
-// 		Participante participante1 = new Participante("participante1", "1");
-// 		System.out.println("Participante " + participante1.getNome());
-// 		valor = new BigDecimal("123.45");
-// 		participante1.setAposta(valor , true, "10:40" );
-// // 		System.out.println("ID Aposta: " + participante1.aposta);
-// // 		System.out.println("Valor: " + aposta.get(0).getValorAposta());
-		
-// 		Participante participante2 = new Participante("participante2", "2");
-// 		Participante participante3 = new Participante("participante3", "3");
-		
 		comp1.addParticipante("participante1", "1");
+		Participante participante1 = comp1.getParticipante(0);
+		participante1.setAposta(valor, true, hora1);
+		System.out.println("\nParticipante: " + participante1.getNome());
+		System.out.println("Chuva: " + participante1.getApostaChuva());
+		System.out.println("Horario: " + participante1.getApostaHorario());
+		System.out.println("Valor: " + participante1.getApostaValor());
 		
-		comp1.participantes.get(0);
+		comp1.addParticipante("participante2", "2");
+		Participante participante2 = comp1.getParticipante(1);
+		participante2.setAposta(valor, false, hora1);
+		System.out.println("\nParticipante: " + participante2.getNome());
+		System.out.println("Chuva: " + participante2.getApostaChuva());
+		System.out.println("Horario: " + participante2.getApostaHorario());
+		System.out.println("Valor: " + participante2.getApostaValor());
 		
-		comp1.setChuva(false);
-		System.out.println("Chuva: " + comp1.getChuva());
-		if(comp1.getChuva()){
-		    comp1.setHorario(dia1);
-		    System.out.println(comp1.getHorario());
+		comp1.addParticipante("participante3", "3");
+		Participante participante3 = comp1.getParticipante(2);
+		participante3.setAposta(valor, true, hora1);
+		System.out.println("\nParticipante: " + participante3.getNome());
+		System.out.println("Chuva: " + participante3.getApostaChuva());
+		System.out.println("Horario: " + participante3.getApostaHorario());
+		System.out.println("Valor: " + participante3.getApostaValor());
+		
+		System.out.println("\nValor Total: " + comp1.setValorTotal());
+		
+		comp1.setChuva(true);
+		comp1.setHorario(hora1);
+		
+		ArrayList<Integer> ganhadores = comp1.verificaGanhadores();
+		BigDecimal valorGanhador = comp1.setValorTotal().divide(BigDecimal.valueOf(ganhadores.size()));
+		
+		System.out.println("\nGanhadores: ");
+		for(int i = 0; i < ganhadores.size(); i++) {
+		    int ganhador = ganhadores.get(i);
+		    Participante participanteGanhador = comp1.getParticipante(ganhador);
+		    System.out.println(participanteGanhador.getNome() + " = " + valorGanhador);
 		}
-		
-		
 	}
 }

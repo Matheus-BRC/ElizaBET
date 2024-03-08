@@ -1,27 +1,17 @@
 import java.math.BigDecimal;
+import java.time.LocalTime;
 
 public class Aposta{
     
     private static int apostas;
-    private int id;
     private BigDecimal valorAposta;
     private boolean chuva;
-    private String horario;
+    private LocalTime horario;
     
-    public Aposta(BigDecimal valorAposta, boolean chuva, String horario){
-        setId(apostas);
+    public Aposta(BigDecimal valorAposta, boolean chuva, LocalTime horario){
         setValorAposta(valorAposta);
         setChuva(chuva);
         setHorario(horario);
-    }
-    
-    private void setId(int apostas){
-        apostas++;
-        this.id = apostas;
-    }
-    
-    public int getId(){
-        return id;
     }
     
     private void setValorAposta(BigDecimal valorAposta){
@@ -40,11 +30,11 @@ public class Aposta{
         return chuva;
     }
     
-    private void setHorario(String horario){
+    private void setHorario(LocalTime horario){
         this.horario = horario;
     }
     
-    public String getHorario(){
+    public LocalTime getHorario(){
         return horario;
     }
 }
