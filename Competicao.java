@@ -10,7 +10,7 @@ public class Competicao{
     private LocalTime horario;
     private DateTimeFormatter formatoDia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
-    boolean chuva;
+    private boolean chuva;
     private ArrayList<Participante> participantes;
     private ArrayList<Integer> ganhadores;
     private BigDecimal valorTotal;
